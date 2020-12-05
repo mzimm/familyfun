@@ -56,9 +56,10 @@ class Game extends Phaser.Scene {
     gfx = this.add.graphics();
 
     // add Sky background sprit
-    this.add.image(400, 300, "sky");
+    this.add.image(400,300, "sky"); // 400, 300  .....
 
     // Create ground platforms
+
     this.allPlayersGroup = this.physics.add.staticGroup();
     this.platforms = this.physics.add.staticGroup();
     this.platforms.create(400, 568, "ground").setScale(2).refreshBody();
@@ -67,14 +68,15 @@ class Game extends Phaser.Scene {
     this.platforms.create(750, 220, "ground");
 
     //new ground
-    this.platforms.create(500, 800, "ground").setScale(3).refreshBody();
 
+    this.platforms.create(500, 800, "ground").setScale(3).refreshBody();
     this.platforms.create(900, 675, "ground");
 
     // Create Player
+
     var playerData = {
       playerName: this.playerName,
-      x: 100,
+      x: 200,
       y: 450,
       isDead: false,
       isImposter: false,
@@ -93,7 +95,7 @@ class Game extends Phaser.Scene {
     this.anims.create({
       key: "left",
       frames: this.anims.generateFrameNumbers("dude", { start: 0, end: 3 }),
-      frameRate: 10,
+      frameRate: 20, //10
       repeat: -1,
     });
 
@@ -106,11 +108,12 @@ class Game extends Phaser.Scene {
     this.anims.create({
       key: "right",
       frames: this.anims.generateFrameNumbers("dude", { start: 5, end: 8 }),
-      frameRate: 10,
+      frameRate: 20, //10
       repeat: -1,
     });
 
     // set colliders between Player and grounds
+
     this.physics.add.collider(this.player, this.platforms);
     this.physics.add.collider(this.player, this.allPlayersGroup);
 
@@ -135,6 +138,7 @@ class Game extends Phaser.Scene {
 
     this.input.keyboard.on("keydown_R", function (event) {
       console.log("Hello from the R Key!");
+      
       that.resetGame(that);
     });
 
@@ -146,6 +150,10 @@ class Game extends Phaser.Scene {
 
   //////// update() is a special hook, called by Phaser3 engine. ///////////
   update() {
+
+   
+
+
     // Create movement controller
     this.cursors = this.input.keyboard.createCursorKeys();
     if (this.cursors.left.isDown) {
@@ -205,7 +213,8 @@ class Game extends Phaser.Scene {
     var allKeys = Object.keys(that.allPlayers);
     allKeys.push(that.player.id);
 
-    console.log(allKeys);
+    //console.log(allKeys);
+    console.log("ALLr Key!");
     allKeys.forEach((id) => {
       firebase
         .database()
